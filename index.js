@@ -6,6 +6,9 @@ const CAR_FORM = {
   carsData: document.getElementById("carsData"),
 };
 
+// this code is coming to present the way of thinking by "base on the model"
+// what the UI shows reflected in the cars model
+
 const cars = [];
 
 // attaching the event to the element DOM
@@ -40,17 +43,52 @@ function drawRow(model) {
   if (!carTR) return;
   CAR_FORM.carsData.appendChild(carTR);
 }
-
 function getCarTR(car) {
   // car.lp
   // car.price
   // car.model
   const { lp, price, model } = car;
-  const tableRow = document.createElement("tr")
+  const tableRow = document.createElement("tr");
+  tableRow.id = lp;
 
+  const tdCarLP = document.createElement("td");
+  tdCarLP.innerText = lp;
+
+  const tdCarPrice = document.createElement("td");
+  tdCarPrice.innerText = price;
+
+  const tdCarModel = document.createElement("td");
+  tdCarModel.innerText = model;
+
+  const deleteButton = document.createElement("button");
+  deleteButton.className = "btn btn-danger";
+  deleteButton.innerText = "X";
+  deleteButton.addEventListener("click", function () {
+    //split function
+    // validate for index
+    const index = _findIndex(cars, lp);
+    if (index >= 0) {
+      cars.splice(index, 1);
+      draw(cars);
+    }
+  });
+  tableRow.append(tdCarLP, tdCarPrice, tdCarModel, deleteButton);
+  return tableRow;
 }
-
+function _findIndex(data, lp) {
+  //return  the index of the element;
+  for (let index = 0; index < data.length; index++) {
+    if (lp === data[index].lp) return index;
+  }
+  return -1;
+}
 //clear the InnerHTML from the table
 function clearTable() {
   CAR_FORM.carsData.innerHTML = "";
+}
+
+function removeFirstCar() {
+  if (!cars.length) return;
+  cars.splice(0, 1);
+  draw(cars);
 }
