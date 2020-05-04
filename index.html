@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car rental</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="jumbotron">Car Rental</h1>
+
+      <div class="row">
+        <form id="carForm">
+          <div class="form-group">
+            <label> License plate </label>
+            <input
+              type="text"
+              class="form-control"
+              id="carLicense"
+              placeholder="Enter License plate"
+            />
+          </div>
+          <div class="form-group">
+            <label> Price </label>
+            <input
+              type="number"
+              class="form-control"
+              id="carPrice"
+              placeholder="Enter Price "
+            />
+          </div>
+          <div class="form-group">
+            <label> Model </label>
+            <input
+              type="text"
+              class="form-control"
+              id="carModel"
+              placeholder="Enter Model Name"
+            />
+          </div>
+          <div class="form-group">
+            <label> Image </label>
+            <input
+              type="text"
+              class="form-control"
+              id="carImage"
+              placeholder="Enter Image URL"
+            />
+          </div>
+          <button
+            type="button"
+            id="addNewCar"
+            class="btn btn-primary"
+            onclick="addCar()"
+          >
+            Save Car
+          </button>
+        </form>
+      </div>
+      <div class="row mt-5">
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th scope="col">License plate</th>
+              <th scope="col">Price</th>
+              <th scope="col">Model</th>
+              <th scope="col">Car Image</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody id="carsData"></tbody>
+        </table>
+      </div>
+    </div>
+    <script src="./models/car.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
