@@ -6,6 +6,11 @@ const CAR_FORM = {
   carsData: document.getElementById("carsData"),
 };
 
+const CONFIG = {
+  IMAGE_HEIGHT: 120,
+  IMAGE_WIDTH: 150,
+};
+
 // this code is coming to present the way of thinking by "base on the model"
 // what the UI shows reflected in the cars model
 
@@ -21,6 +26,7 @@ function addCar() {
     lp: CAR_FORM.carLisence.value,
     price: CAR_FORM.carPrice.value,
     model: CAR_FORM.carModel.value,
+    image: CAR_FORM.carImage.value,
   });
   draw(cars);
   // draw the array into the table
@@ -47,7 +53,9 @@ function getCarTR(car) {
   // car.lp
   // car.price
   // car.model
-  const { lp, price, model } = car;
+  // car.image
+  const { lp, price, model, image } = car;
+  // console.log(image) // url image from the car model
   const tableRow = document.createElement("tr");
   tableRow.id = lp;
 
@@ -59,6 +67,9 @@ function getCarTR(car) {
 
   const tdCarModel = document.createElement("td");
   tdCarModel.innerText = model;
+
+  const tdCarImage = document.createElement("td");
+  tdCarImage.append(_getImagElement(image));
 
   const deleteButton = document.createElement("button");
   deleteButton.className = "btn btn-danger";
@@ -72,8 +83,22 @@ function getCarTR(car) {
       draw(cars);
     }
   });
-  tableRow.append(tdCarLP, tdCarPrice, tdCarModel, deleteButton);
+
+  const tdActions = document.createElement("td");
+  tdActions.append(deleteButton);
+
+  tableRow.append(tdCarLP, tdCarPrice, tdCarModel, tdCarImage, tdActions);
   return tableRow;
+
+  function _getImagElement(imageUrl) {
+    if (!imageUrl) return;
+    const img = document.createElement("img");
+    img.src = imageUrl;
+    img.height = CONFIG.IMAGE_HEIGHT;
+    img.width = CONFIG.IMAGE_WIDTH;
+    img.alt = "No Image";
+    return img;
+  }
 }
 function _findIndex(data, lp) {
   //return  the index of the element;
