@@ -59,19 +59,19 @@ function getCarTR(car) {
   const tableRow = _getTRElement();
   tableRow.id = lp;
 
-  const tdCarLP = document.createElement("td");
+  const tdCarLP = _getTDElement();
   tdCarLP.innerText = lp;
 
-  const tdCarPrice = document.createElement("td");
+  const tdCarPrice = _getTDElement();
   tdCarPrice.innerText = price;
 
-  const tdCarModel = document.createElement("td");
+  const tdCarModel = _getTDElement();
   tdCarModel.innerText = model;
 
-  const tdCarImage = document.createElement("td");
+  const tdCarImage = _getTDElement();
   tdCarImage.append(_getImagElement(image));
 
-  const tdActions = document.createElement("td");
+  const tdActions = _getTDElement();
   tdActions.append(
     _getDeleteButtonElement({ className: "btn btn-danger", text: "X" })
   );
@@ -82,6 +82,11 @@ function getCarTR(car) {
   tableRow.append(tdCarLP, tdCarPrice, tdCarModel, tdCarImage, tdActions);
   return tableRow;
 
+  function _getTDElement() {
+    const td = document.createElement("td");
+    td.style.verticalAlign = "middle";
+    return td;
+  }
   function _getTRElement() {
     return document.createElement("tr");
   }
