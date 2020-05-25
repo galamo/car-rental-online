@@ -56,7 +56,7 @@ function getCarTR(car) {
   // car.image
   const { lp, price, model, image } = car;
   // console.log(image) // url image from the car model
-  const tableRow = document.createElement("tr");
+  const tableRow = _getTRElement();
   tableRow.id = lp;
 
   const tdCarLP = document.createElement("td");
@@ -71,25 +71,36 @@ function getCarTR(car) {
   const tdCarImage = document.createElement("td");
   tdCarImage.append(_getImagElement(image));
 
-  const deleteButton = document.createElement("button");
-  deleteButton.className = "btn btn-danger";
-  deleteButton.innerText = "X";
-  deleteButton.addEventListener("click", function () {
-    //split function
-    // validate for index
-    const index = _findIndex(cars, lp);
-    if (index >= 0) {
-      cars.splice(index, 1);
-      draw(cars);
-    }
-  });
-
   const tdActions = document.createElement("td");
-  tdActions.append(deleteButton);
+  tdActions.append(
+    _getDeleteButtonElement({ className: "btn btn-danger", text: "X" })
+  );
+  tdActions.append(
+    _getDeleteButtonElement({ className: "btn btn-success", text: "Edit" })
+  );
 
   tableRow.append(tdCarLP, tdCarPrice, tdCarModel, tdCarImage, tdActions);
   return tableRow;
 
+  function _getTRElement() {
+    return document.createElement("tr");
+  }
+  function _getDeleteButtonElement(config) {
+    const deleteButton = document.createElement("button");
+    const { className, text } = config;
+    deleteButton.className = className;
+    deleteButton.innerText = text;
+    deleteButton.addEventListener("click", function () {
+      //split function
+      // validate for index
+      const index = _findIndex(cars, lp);
+      if (index >= 0) {
+        cars.splice(index, 1);
+        draw(cars);
+      }
+    });
+    return deleteButton;
+  }
   function _getImagElement(imageUrl) {
     if (!imageUrl) return;
     const img = document.createElement("img");
