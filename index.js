@@ -146,13 +146,6 @@ function searchAction() {
     return;
   }
   const searchValue = CAR_FORM.carSearch.value.toLowerCase();
-  //TODO list:
-  // extract search value // CAR_FORM.carSearch.value
-  // search in the cars array the relevant cars
-  // 1. iterate cars array
-  // 2. add condition model equals to iterator.model
-  // 3. add the new list to new array
-  // 4. draw!!!!
   const filteredArray = [];
   for (let index = 0; index < cars.length; index++) {
     if (cars[index].model) {
