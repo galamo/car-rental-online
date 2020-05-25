@@ -157,6 +157,20 @@ function searchAction() {
   }
   draw(filteredArray);
 }
+
+function modernSearchAction() {
+  if (!CAR_FORM.carSearch.value) {
+    draw(cars);
+    return;
+  }
+  //filter higher order function
+  const searchValue = CAR_FORM.carSearch.value.toLowerCase();
+  const filteredCars = cars.filter(function (car) {
+    return car.model && car.model.toLowerCase().includes(searchValue);
+  });
+  draw(filteredCars);
+}
+
 function removeFirstCar() {
   if (!cars.length) return;
   cars.splice(0, 1);
