@@ -4,6 +4,7 @@ const CAR_FORM = {
   carModel: document.getElementById("carModel"),
   carImage: document.getElementById("carImage"),
   carsData: document.getElementById("carsData"),
+  carSearch: document.getElementById("searchText"),
 };
 
 const CONFIG = {
@@ -139,6 +140,30 @@ function clearTable() {
   CAR_FORM.carsData.innerHTML = "";
 }
 
+function searchAction() {
+  if (!CAR_FORM.carSearch.value) {
+    draw(cars);
+    return;
+  }
+  const searchValue = CAR_FORM.carSearch.value.toLowerCase();
+  //TODO list:
+  // extract search value // CAR_FORM.carSearch.value
+  // search in the cars array the relevant cars
+  // 1. iterate cars array
+  // 2. add condition model equals to iterator.model
+  // 3. add the new list to new array
+  // 4. draw!!!!
+  const filteredArray = [];
+  for (let index = 0; index < cars.length; index++) {
+    if (cars[index].model) {
+      const model = cars[index].model.toLowerCase();
+      if (model === searchValue) {
+        filteredArray.push(cars[index]);
+      }
+    }
+  }
+  draw(filteredArray);
+}
 function removeFirstCar() {
   if (!cars.length) return;
   cars.splice(0, 1);
